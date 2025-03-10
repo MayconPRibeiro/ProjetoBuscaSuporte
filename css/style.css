@@ -468,3 +468,151 @@
 
 }
 /*Fecha o Responsivo*/
+
+
+/* Resetando margens e padding padrão */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo geral do formulário */
+form {
+  width: 100%;
+  max-width: 700px; /* Largura máxima do formulário */
+  margin: 50px auto; /* Centraliza o formulário */
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid #e0e0e0;
+}
+
+/* Título do formulário */
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: bold;
+}
+
+/* Estilo para os labels */
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+/* Estilo dos campos de entrada de texto */
+input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px; /* Espaçamento entre os campos */
+  border: 1px solid #ddd; /* Borda suave */
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9; /* Fundo claro */
+  transition: all 0.3s ease;
+}
+
+/* Efeito de foco nos campos de texto */
+input[type="text"]:focus {
+  border-color: #0553a5; /* Azul para foco */
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(5, 83, 165, 0.3);
+  outline: none;
+}
+
+/* Estilo para os radio buttons */
+input[type="radio"] {
+  width: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/* Estilo para os labels dos radio buttons */
+label[for="suporte"], label[for="clientes"], label[for="todos"] {
+  font-size: 16px;
+  color: #333;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+/* Botão de envio */
+button[type="submit"] {
+  width: 100%;
+  padding: 15px;
+  background-color: #FF5722; /* Laranja */
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efeito de hover no botão */
+button[type="submit"]:hover {
+  background-color: #e64a19; /* Laranja mais escuro */
+}
+
+/* Estilo para o footer */
+.main_footer {
+  background-color: #353535;
+  color: #fff;
+  font-size: 0.875em;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.main_footer p {
+  font-family: 'Arial', sans-serif;
+  color: #e1e0e0;
+  margin: 0;
+}
+
+.main_footer a {
+  color: #FF5722;
+  text-decoration: none;
+}
+
+.main_footer a:hover {
+  color: #e64a19;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 768px) {
+  form {
+      padding: 20px;
+      margin: 15px;
+  }
+
+  button[type="submit"] {
+      padding: 12px;
+      font-size: 16px;
+  }
+
+  .content {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+  }
+}
+
+textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-height: 50px; /* Altura mínima */
+  resize: none; /* Evita que o usuário redimensione o campo manualmente */
+}
