@@ -26,7 +26,13 @@
       <input type="text" id="titulo" name="titulo" maxlength="400" /><br />
 
       <label for="descricao">Descrição</label>
-      <textarea id="descricao" name="descricao" rows="4"></textarea><br />
+      <textarea
+        id="descricao"
+        name="descricao"
+        rows="4"
+        maxlength="700"
+      ></textarea>
+      <p id="caracteresRestantes">700 caracteres restantes</p>
 
       <label for="nome_tecnico">Seu nome</label>
       <input type="text" id="nome_tecnico" name="nome_tecnico" /><br />
@@ -53,6 +59,18 @@
         this.style.height = "auto";
         // Ajusta a altura conforme o conteúdo
         this.style.height = this.scrollHeight + "px";
+      });
+
+      const descricao = document.getElementById("descricao");
+      const caracteresRestantes = document.getElementById(
+        "caracteresRestantes"
+      );
+      const maxLength = descricao.getAttribute("maxlength");
+
+      descricao.addEventListener("input", function () {
+        const caracteresDigitados = descricao.value.length;
+        const restante = maxLength - caracteresDigitados;
+        caracteresRestantes.textContent = `${restante} caracteres restantes`;
       });
     </script>
   </body>
