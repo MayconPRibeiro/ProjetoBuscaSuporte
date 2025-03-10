@@ -1,4 +1,3 @@
-
 from fuzzywuzzy import process
 
 # Lista de títulos (simulando um banco de dados)
