@@ -616,3 +616,7 @@ textarea {
   min-height: 50px; /* Altura mínima */
   resize: none; /* Evita que o usuário redimensione o campo manualmente */
 }
+
+.box-artigo{
+  background: #27272700;
+}
