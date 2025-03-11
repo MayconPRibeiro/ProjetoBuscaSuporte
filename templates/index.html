@@ -10,10 +10,9 @@
     <meta name="robots" content="index, follow"/>
 
     
-
-	  <link rel="stylesheet" type="text/css" href="css/reset.css">
-	  <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/fonts-icones.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fotns-icones.css') }}">
     <link rel="shortcut icon" href="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1" type="image/ico" />
 
  </head>
@@ -25,7 +24,7 @@
     <div class="content">
     
         <div class="main_header_logo">
-            <a href="https://assecont.com.br" target="_blank"><img src="img/logoAssecont.png" alt="logo.png" title="Assecont"/></a>
+            <a href="https://assecont.com.br" target="_blank"><img src="{{ url_for('static', filename='images/logoAssecont.png')}}" alt="logo.png" title="Assecont"/></a>
         </div>
 
         <div class="menu">
@@ -34,7 +33,7 @@
             
               <ul>
                 
-                <li><a href="#" title="Home">Inicio</a></li>
+                <li><a href="{{url_for('index')}}" title="Home">Inicio</a></li>
 
                 </li>
 
@@ -111,7 +110,7 @@
 
                 <li><a href="#" title="">Textos padrão</a></li>
                 <li><a href="#" title="sugestao">Sugestões de melhorias</a></li>
-                <li><a href="novo_conteudo.html" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
+                <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
               
               </ul>
             
@@ -213,8 +212,8 @@
     
 </footer>
 
-<script src="js/jquery.js"></script>
-<script src="js/script.js"></script>
+<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
 <script>
     
     //Menu
