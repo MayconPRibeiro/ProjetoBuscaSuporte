@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta http-equiv="Content-Language" content="pt-br">
+<title>Consulta do Suporte</title>
+<link href="estilo.css" rel="stylesheet" type="text/css">
+    
+	<script src="//cdn.ckeditor.com/4.11.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+      window.onload = function()  {
+        CKEDITOR.replace( 'conteudo1' );
+     };
+    </script>
+	
+</head>
+
+<body>
+<center><h1></h1><br />
+<a href="http://www.asseponto.com.br/assepontoControle/Suporte/Atendimento/default.aspx?filTipo=1">
+<img src="logo.png"/>
+</a>
+<br /></center>
+<br />
+<br />
+<form method="get" action="index.html"><big><button type="submit">Pagina Inicial</button></big></form>
+
+<div>
+  <form action="form.php" method="post" color=#fff>
+    
+    <big><label>Titulo</label><br>
+    <input type="text" name="titulo" placeholder="Titulo.."><br>
+
+    <label>Atendente</label><br>
+    <input type="text" name="atendente" placeholder="Atendente.."><br>
+
+    <label>Categoria</label><br>
+    <select name="categoria">
+      <option value="RELOGIO">RELOGIO</option>
+      <option value="ERRO SQL">ERRO SQL</option>
+	  <option value="CLT">CLT</option>
+      <option value="Banco de Horas">Banco de Horas</option>
+      <option value="INICIAR SERVICO">INICIAR SERVICO</option>
+      <option value="RESTAURAR BANCO">RESTAURAR BANCO</option>
+      <option value="CRIAR ESTACAO">CRIAR ESTACAO</option>
+      <option value="MARCACOES DO DIA">MARCACOES DO DIA</option>
+      <option value="MARCACOES NOTURNAS">MARCACOES NOTURNAS</option>
+      <option value="PARAMETROS DO SISTEMA">PARAMETROS DO SISTEMA</option>
+      <option value="FAIXA DE CALCULO">FAIXA DE CALCULO</option>
+      <option value="COMPENSACAO">COMPENSACAO</option>
+      <option value="ROTINAS DE TRATAMENTO">ROTINAS DE TRATAMENTO</option>
+	<option value="ASSEFIN">ASSEFIN</option>
+	<option value="COMANDOS">COMANDOS</option>
+	  <option value="ESCALA">ESCALA</option>
+      <option value="APONTAMENTO">APONTAMENTO</option>
+      <option value="RELATORIOS">RELATORIOS</option>
+      <option value="IMPORTAR PLANILHA">PLANILHA</option>
+      <option value="INSTALAR SQL">INSTALAR SQL</option>
+      <option value="TREINAMENTO">TREINAMENTO</option>
+      <option value="CADASTRO DE FUNCIONARIO">CADASTRO DE FUNCIONARIO</option>
+	<option value="REDES">REDES</option>
+	<option value="UTILIDADES">UTILIDADES</option>
+	
+    </select><br>
+
+    <label>Conteudo</label><br>
+	<textarea name="conteudo" rows="10" cols= 100%></textarea><br/>
+
+<script type="text/javascript">
+var d = new Date()
+document.write(d.toLocaleString())
+</script><br /><br>
+
+    <input type="submit" value="Enviar">
+  </form>
+</div>
+
+</html>

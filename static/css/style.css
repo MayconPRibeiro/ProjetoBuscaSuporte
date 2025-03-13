@@ -620,3 +620,8 @@ textarea {
 .box-artigo{
   background: #27272700;
 }
+
+/**{
+  background-image: url(/ProjetoBuscaSuporte/static/images/fundo.png);
+  background-attachment: fixed;
+}*/

@@ -142,36 +142,25 @@
   
   </header>
 
-    <h2>Novo Conteúdo</h2>
+    <h2>Sua Sugestão</h2>
     <form>
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" name="titulo" maxlength="150" placeholder="Digite o título"/><br />
+        <label for="nome">Seu nome</label>
+        <input type="text" id="nome" name="nome" maxlength="150" placeholder="Seu Nome"/><br />
 
-      <label for="descricao">Descrição</label>
-      <textarea
-        id="descricao"
-        name="descricao"
-        rows="4"
-        maxlength="700"
-        placeholder="Digite aqui o novo procedimento"
-      ></textarea>
-      <p id="caracteresRestantes">700 caracteres restantes</p>
+        <label for="descricao">Descrição</label>
+        <textarea
+            id="descricao"
+            name="descricao"
+            rows="4"
+            maxlength="700"
+            placeholder="Digite aqui sua sugestão"
+        ></textarea>
+        <p id="caracteresRestantes">700 caracteres restantes</p><br>
 
-      <label for="nome_tecnico">Seu nome</label>
-      <input type="text" id="nome_tecnico" name="nome_tecnico" maxlength="150" placeholder="Seu nome"/><br />
+        <label for="email">Seu Email</label>
+        <input type="email" name="email" id="email" maxlength="150" placeholder="exemplo@exemplo.com"><br>
 
-      <label for="tipo_de_procedimento">Permissões</label><br />
-
-      <input type="radio" name="permissoes" id="suporte" value="suporte" />
-      <label for="suporte">Apenas Suporte</label><br />
-
-      <input type="radio" name="permissoes" id="clientes" value="clientes" />
-      <label for="clientes">Apenas Clientes</label><br />
-
-      <input type="radio" name="permissoes" id="todos" value="todos" />
-      <label for="todos">Todos</label><br />
-
-      <button type="submit">Enviar</button>
+        <button type="submit">Enviar</button>
     </form>
 
     <script>

@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Consulta do Suporte</title>
+<script type="text/javascript" src="funcs.js"></script>
+<script src="https://wchat.freshchat.com/js/widget.js"></script>
+<script src="https://snippets.freshchat.com/js/fc-pre-chat-form-v2.js"></script>
+<link href="estilo.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<center><h1></h1><br />
+<a href="http://www.asseponto.com.br/assepontoControle/Suporte/Atendimento/default.aspx?filTipo=1">
+<img src="logo.png"/>
+</a>
+</center>
+<br />
+<br />
+<form method="get" action="form.html"><button type="submit">Add Conteudo</button></form>
+<center><img src="busca.png"/><br>
+
+<input type="text" id="busca" onkeyup="buscarNoticias(this.value)" /></center>
+<center>
+<input type="submit" id="busca" class="button" value="VIDEOS" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="RHJ" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="CONTROL ID" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="GERTEC" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="HENRY" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="CLT" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="ERRO SQL" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="REDES" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="ASSEFIN" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="RELATORIOS" onclick="buscarNoticias(this.value)"/>
+<input type="submit" id="busca" class="button" value="COMANDOS" onclick="buscarNoticias(this.value)"/>
+</center>
+<br />
+
+<label id="resultado" ></label>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close"></span>
+    <center><pre id="conteudo"></pre></center>
+  </div>
+
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("resultado");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+</script>
+
+<script src="https://unpkg.com/blip-chat-widget" type="text/javascript">
+</script>
+<script src="https://unpkg.com/blip-chat-widget" type="text/javascript">
+</script>
+
+<script>
+    (function () {
+        window.onload = function () {
+            new BlipChat()
+            .withAppKey('YXNzZWJvdDo3ZTljNmJiYi0yNWFmLTQxOGItODcwNy03NGE4NGE3Nzk3YjU=')
+            .withButton({"color":"#f4921d","icon":""})
+            .build();
+        }
+    })();
+</script>
+                                
+                                
+	    
+</body>
+</html>

@@ -15,10 +15,21 @@ def novo_conteudo():
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
 
-        #conectar e inserir no banco
+        #Implementar conectar e inserir no banco
 
         return render_template("novo_conteudo.html", msg='Salvo com sucesso!')
     return render_template("novo_conteudo.html")
+
+@app.route("/sugestao", methods=['POST', 'GET'])
+def sugestao():
+    if request.method=='POST':
+        nome = request.form['titulo']
+        descricao = request.form['descricao']
+        email = request.form['email']
+
+        return render_template("sugestao.html", msg = 'Enviado com sucesso!')
+    return render_template("sugestao.html")
+        
     
 
 

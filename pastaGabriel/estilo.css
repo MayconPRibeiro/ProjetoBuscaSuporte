@@ -1,0 +1,188 @@
+﻿@charset "utf-8";
+
+body {
+	background-image: url('fundo.png');
+    	background-repeat: repeat;
+	font-family: Calibri, Verdana, Arial;
+	font-size: 16px;
+}
+
+a:link {
+	color: #002f5e;
+	font-weight: bold;
+	font-family: Carnas;
+	line-height: 1.5;
+	text-decoration:none;
+	margin-left: 2.5%;
+
+}
+a:visited {
+	color: #999;
+
+	
+}
+a:hover {
+	color: #999;
+	font-weight: bold;
+
+}
+a:active {
+	color: #999;
+	
+}
+
+
+h1 {
+	font-family: Calibri, Verdana, Arial;
+	color:# blue;
+}
+
+input {
+	width: 60%;
+	padding: 05px;
+	font-family: 'Carnas',Calibri, Verdana, Arial;
+	display: inline-block;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000000;
+	border:solid 2px #333;
+	​
+}
+input[type=text], select {
+    width: 70%;
+    padding: 8px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Carnas';
+}
+
+textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-family: 'Carnas';
+}
+#conteudob {
+    color: white;
+	width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-weight: 500;
+    font-family: 'Carnas';
+}
+input[type=submit] {
+    width: 20%;
+    background-color: #f4921d;
+    color: white;
+    padding: 12px 10px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-family: 'Carnas';
+}
+input[class="button"] {
+    width: 8.5%;
+    font-size: 12px;
+    background-color: #f4921d;
+    color: white;
+    padding: 6px 1px;
+    margin: 4px 0;
+    border: none;
+	text-decoration:none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'Carnas';
+}
+button {
+    width: 13%;
+    font-size: 15px;
+    background-color: #f4921d;
+    color: white;
+    padding: 6px 1px;
+    margin: 8px 0;
+    border: none;
+ 
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: 'Carnas';
+    
+}
+
+label {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Carnas';
+}
+
+
+#conteudo {
+	width: 750px;
+	text-align:left;
+	background-color:#fff;
+	padding: 2mm;
+	white-space: pre-wrap;
+	z-index: 100;
+	float: center;
+	
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 2%; /* Location of the box */
+	padding-bottom: 2%; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
