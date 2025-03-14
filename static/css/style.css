@@ -21,6 +21,8 @@ body {
 .header_logo a img {
   height: 50px;
   width: auto;
+  margin-bottom: 1%;
+  margin-left: 1%;
 }
 
 .menu {
@@ -431,11 +433,6 @@ textarea {
   background: #27272700;
 }
 
-*{
-  background-image: url(/ProjetoBuscaSuporte/static/images/fundo.png);
-  background-attachment: fixed;
-}
-
 
 /* Submenu de segundo nível (ao lado do primeiro) */
 .nav_menu li > ul > li:hover > ul {
@@ -472,3 +469,4 @@ textarea {
     left: 0;
   }
 }
+
