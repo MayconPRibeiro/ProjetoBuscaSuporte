@@ -1,12 +1,17 @@
 import mysql.connector
+import os
+from flask import current_app
+from dotenv import load_dotenv
 
-db_config = {
-    'host' : '',
-    'user' : 'root',
-    'password' : 'Assecont1973',
-    'database' : 'DB_Busca'
-}
+load_dotenv()
 
 def get_db_connection():
+    db_config = {
+        'host' : os.getenv('DB_HOST'),
+        'user' : os.getenv('DB_USER'),
+        'password': os.getenv('DB_PASSWORD'),
+        'database': os.getenv('DB_NAME')
+    }
+
     connection = mysql.connector.connect(**db_config)
     return connection
