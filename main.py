@@ -7,6 +7,10 @@ app = Flask(__name__) #objeto flask
 def index():
     return render_template("index.html")
 
+@app.route("/pagina_inicial", methods=['POST', 'GET'])
+def pagina_inicial():
+    return render_template("pagina_inicial.html")
+
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
 def novo_conteudo():
     if request.method == 'POST':

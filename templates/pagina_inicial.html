@@ -118,48 +118,133 @@
 
 </header>
 
-    <h2 id="titulo_h2" >Sua Sugestão</h2>
-    <form class="form">
-        <label for="nome">Seu nome</label>
-        <input type="text" id="nome" name="nome" maxlength="150" placeholder="Seu Nome"/><br />
+<main class="main">
+            
+            <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
 
-        <label for="descricao">Descrição</label>
-        <textarea
-            id="descricao"
-            name="descricao"
-            rows="4"
-            maxlength="700"
-            placeholder="Digite aqui sua sugestão"
-        ></textarea>
-        <p id="caracteresRestantes">700 caracteres restantes</p><br>
+            <div class="search">
+              <input type="search" id="txtBuscar" placeholder="Digite sua Pesquisa">
+            </div>
+            
+            <div class="box-artigo">
+                
+                <div id="espaco1">
 
-        <label for="email">Seu Email</label>
-        <input type="email" name="email" id="email" maxlength="150" placeholder="exemplo@exemplo.com"><br>
+                  <!--Espaço 1-->
 
-        <button type="submit">Enviar</button>
-    </form>
+                  <h2 id="tituloEspaco">Últimas Atualizações Asseponto</h2><br><br>
 
-    <script>
-      const textarea = document.getElementById("descricao");
 
-      textarea.addEventListener("input", function () {
-        // Reseta a altura do campo antes de ajustar
-        this.style.height = "auto";
-        // Ajusta a altura conforme o conteúdo
-        this.style.height = this.scrollHeight + "px";
-      });
+                  <a id="linkPoupUp" href="#openModal">[Atualização] AssepontoWEB Exemplo</a>
 
-      const descricao = document.getElementById("descricao");
-      const caracteresRestantes = document.getElementById(
-        "caracteresRestantes"
-      );
-      const maxLength = descricao.getAttribute("maxlength");
+                  <div id="openModal" class="modalDialog">
+                    <div>
+                      <a href="#close" title="Close" class="close">X</a>
+                      <h2>Título</h2>
+                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor beatae reprehenderit quos unde nihil adipisci repudiandae velit! Inventore fuga blanditiis atque esse cupiditate, itaque nemo, perspiciatis, necessitatibus consequatur expedita eos?</p>
+                    </div>
+                  </div>
 
-      descricao.addEventListener("input", function () {
-        const caracteresDigitados = descricao.value.length;
-        const restante = maxLength - caracteresDigitados;
-        caracteresRestantes.textContent = `${restante} caracteres restantes`;
-      });
-    </script>
-  </body>
+                  <!--FIM Espaço 1-->
+
+                </div>
+
+                <div id="esapco2">
+
+                  <!--Espaço 2-->
+
+                  <h2 id="tituloEspaco">Últimas Postagens</h2><br><br>
+
+
+                  <a id="linkPoupUp" href="#openModal">[Nova função] Desbloqueio Control ID via Assebot</a>
+
+                  <div id="openModal" class="modalDialog">
+                    <div>
+                      <a href="#close" title="Close" class="close">X</a>
+                      <h2>Título</h2>
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae accusantium excepturi adipisci rem debitis non libero fugiat. Corrupti repellat velit ipsum officia maiores assumenda aliquid molestiae debitis, expedita quaerat?</p>
+
+                    </div>
+                  </div>
+                  
+                  <!--FIM Espaço 2-->
+
+                </div>
+              
+
+            </div><!--Box Artigo 1 -->
+
+</main>
+
+<footer class="main_footer">
+    <div class="main_footer_copy">
+        
+        <p class="m-b-footer"> Grupo Assecont, todos os direitos reservados.</p> 
+        <p class="by"><i></i> Desenvolvido por: RESOLVEDORES <a href="" title="Templates Html" target="_blank"></a></p>
+    
+    </div>
+
+    <!-- API Acessibilidade -->
+    
+</footer>
+
+<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
+<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+<script>
+    
+    //Menu
+    $(".main-nav ul li:has(ul)").addClass("submenu");
+    $(".main-nav ul li:has(ul)").append("<i></i>");
+    $(".main-nav ul i").click(function() {
+      $(this)
+        .parent("li")
+        .toggleClass("open");
+      $(this)
+        .parent("li")
+        .children("ul")
+        .slideToggle();
+    });
+
+    //Menu Mobile
+    $(".mob-btn").click(function() {
+      if (!$("html").hasClass("show-menu")) {
+        $("html").addClass("show-menu");
+      } else {
+        $("html").removeClass("show-menu");
+      }
+    });
+
+    $(".overlay").click(function() {
+      if ($("html").hasClass("show-menu")) {
+        $("html").removeClass("show-menu");
+      }
+    });
+
+    //Aparecer addClass
+    $(".first ul")
+    
+      .clone()
+      .prependTo(".main-nav")
+      .addClass("desk-hide");
+
+    $(".last ul")
+    
+      .clone()
+      .appendTo(".main-nav")
+      .addClass("desk-hide");
+
+</script>
+<body class="mat-typography">
+  <app-root></app-root>
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+</body>
 </html>
