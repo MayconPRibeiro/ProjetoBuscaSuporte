@@ -1,146 +1,122 @@
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta
-      name="URL"
-      content="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1"
-    />
+
+ <head> 
+	
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="URL" content="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1"/>
     <meta http-equiv="content-language" content="pt-br" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow"/>
 
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/reset.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/fotns-icones.css') }}"
-    />
-    <link
-      rel="shortcut icon"
-      href="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1"
-      type="image/ico"
-    />
-  </head>
-
-  <body>
-
-    <header class="main_header container">        
     
-      <div class="content">
-      
-          <div class="main_header_logo">
-              <a href="https://assecont.com.br" target="_blank"><img src="{{ url_for('static', filename='images/logoAssecont.png')}}" alt="logo.png" title="Assecont"/></a>
-          </div>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fotns-icones.css') }}">
+    <link rel="shortcut icon" href="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1" type="image/ico" />
+
+ </head>
+
+<body>
+    
+<header class="header">        
   
-          <div class="menu">
-  
-              <nav class="main-nav">
-              
-                <ul>
-                  
-                  <li><a href="{{url_for('index')}}" title="Home">Inicio</a></li>
-  
-                  </li>
-  
-                  <li><a href="">Relatórios</a>
-                   
-                      <ul>
-                          
-                          <li><a href="#" title="Relatórios">Apontamento</a></li>
-                          <li><a href="#" title="Relatórios">Banco de horas</a></li>
-                          <li><a href="#" title="Relatórios">Justificativas</a></li>
-                          <li><a href="#" title="Relatórios">Macações</a></li>
-  
-                      </ul>
-  
-                  </li>
-  
-                  <li><a href="">Comandos SQL</a>
-                   
+        <div class="header_logo">
+            <a href="https://assecont.com.br" target="_blank"><img src="{{ url_for('static', filename='images/logoAssecontBranco.png')}}" alt="logo.png" title="Assecont"/></a>
+        </div>
+
+        <div class="menu">
+
+            <nav class="nav_menu">
+            
+              <ul>
+                
+                <li><a href="{{url_for('index')}}" title="Home">Inicio</a></li>
+
+                </li>
+
+                <li><a href="">Relatórios</a>
+                 
                     <ul>
                         
-                        <li><a href="#" title="Relatórios">Apagar Marcações</a></li>
-                        <li><a href="#" title="Relatórios">Duplicidade</a></li>
+                        <li><a href="#" title="Relatórios">Apontamento</a></li>
+                        <li><a href="#" title="Relatórios">Banco de horas</a></li>
                         <li><a href="#" title="Relatórios">Justificativas</a></li>
                         <li><a href="#" title="Relatórios">Macações</a></li>
-  
+
                     </ul>
-  
+
                 </li>
-  
-                  <li><a href="">Relógios</a>
-                  
-                      <ul>
-  
-                          <li><a href="#" title="zkt">ZKTeco</a></li>
-                          <li><a href="#" title="control_id">Control ID</a>
-  
-                          <ul>
-                            <li><a href="#" title="id_class">ID Class</a></li>
-                            <li><a href="#" title="idx">IDX</a></li>
-                          </ul>
-  
-                          <li><a href="#" title="gertec">Gertec</a>
-  
-                            <ul>
-                              <li><a href="#" title="g2_d">G2 D</a></li>
-                              <li><a href="#" title="g2_bpd">G2 BPD</a></li>
-                              <li><a href="#" title="g2_b">G3 B</a></li>
-                              <li><a href="#" title="g2_kr">G3 KR</a></li>
-                            </ul>
-  
-                          <li><a href="#" title="henry">Henry</a>
-  
-                            <ul>
-                              <li><a href="#" title="adv">ADV</a></li>
-                              <li><a href="#" title="compact">Compact</a></li>
-                              <li><a href="#" title="prime">Prime</a></li>
-                              <li><a href="#" title="superfacil">Super Facil</a></li>
-                            </ul>
-  
-                          <li><a href="#" title="Kurumim">Kurumim</a>
-                            <ul>
-                              <li><a href="#" title="pendrive">Pendrive</a></li>
-                            </ul>
-                          <li><a href="#" title="top_data">TOP DATA</a></li>
-                          <li><a href="#" title="id_data">ID DADA</a></li>
-                          <li><a href="#" title="zpm">ZPM</a></li>
-                          <li><a href="#" title="dimep">DIMEP</a></li>
-                          </li>
-                          
-                        
-                      </ul>
-  
-                  </li>
-  
-                  <li><a href="#" title="">Textos padrão</a></li>
-                  <li><a href="{{ url_for('sugestao')}}" title="sugestao">Sugestões de melhorias</a></li>
-                  <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
+
+                <li><a href="">Comandos SQL</a>
+                 
+                  <ul>
+                      
+                      <li><a href="#" title="Relatórios">Apagar Marcações</a></li>
+                      <li><a href="#" title="Relatórios">Duplicidade</a></li>
+                      <li><a href="#" title="Relatórios">Justificativas</a></li>
+                      <li><a href="#" title="Relatórios">Macações</a></li>
+
+                  </ul>
+
+              </li>
+
+                <li><a href="">Relógios</a>
                 
-                </ul>
+                    <ul>
+
+                        <li><a href="#" title="zkt">ZKTeco</a></li>
+                        <li><a href="#" title="control_id">Control ID</a>
+
+                        <ul>
+                          <li><a href="#" title="id_class">ID Class</a></li>
+                          <li><a href="#" title="idx">IDX</a></li>
+                        </ul>
+
+                        <li><a href="#" title="gertec">Gertec</a>
+
+                          <ul>
+                            <li><a href="#" title="g2_d">G2 D</a></li>
+                            <li><a href="#" title="g2_bpd">G2 BPD</a></li>
+                            <li><a href="#" title="g2_b">G3 B</a></li>
+                            <li><a href="#" title="g2_kr">G3 KR</a></li>
+                          </ul>
+
+                        <li><a href="#" title="henry">Henry</a>
+
+                          <ul>
+                            <li><a href="#" title="adv">ADV</a></li>
+                            <li><a href="#" title="compact">Compact</a></li>
+                            <li><a href="#" title="prime">Prime</a></li>
+                            <li><a href="#" title="superfacil">Super Facil</a></li>
+                          </ul>
+
+                        <li><a href="#" title="Kurumim">Kurumim</a>
+                          <ul>
+                            <li><a href="#" title="pendrive">Pendrive</a></li>
+                          </ul>
+                        <li><a href="#" title="top_data">TOP DATA</a></li>
+                        <li><a href="#" title="id_data">ID DADA</a></li>
+                        <li><a href="#" title="zpm">ZPM</a></li>
+                        <li><a href="#" title="dimep">DIMEP</a></li>
+                        </li>
+                        
+                      
+                    </ul>
+
+                </li>
+
+                <li><a href="#" title="">Manuais</a></li>
+                <li><a href="{{ url_for('sugestao')}}" title="sugestao">Sugestões de melhorias</a></li>
+                <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
               
-              </nav>
-  
-              <div class="mob-btn">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-  
-              <div class="overlay"></div>
+              </ul>
             
-          </div><!-- menu -->
+            </nav>
           
-      
-      </div><!--content-->
-  
-  </header>
+        </div><!-- menu -->
+
+</header>
 
     <h2>Novo Conteúdo</h2>
     <form>

@@ -19,17 +19,15 @@
 
 <body>
     
-<header class="main_header container">        
-    
-    <div class="content">
-    
-        <div class="main_header_logo">
-            <a href="https://assecont.com.br" target="_blank"><img src="{{ url_for('static', filename='images/logoAssecont.png')}}" alt="logo.png" title="Assecont"/></a>
+<header class="header">        
+  
+        <div class="header_logo">
+            <a href="https://assecont.com.br" target="_blank"><img src="{{ url_for('static', filename='images/logoAssecontBranco.png')}}" alt="logo.png" title="Assecont"/></a>
         </div>
 
         <div class="menu">
 
-            <nav class="main-nav">
+            <nav class="nav_menu">
             
               <ul>
                 
@@ -108,35 +106,19 @@
 
                 </li>
 
-                <li><a href="#" title="">Textos padrão</a></li>
+                <li><a href="#" title="">Manuais</a></li>
                 <li><a href="{{ url_for('sugestao')}}" title="sugestao">Sugestões de melhorias</a></li>
                 <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
               
               </ul>
             
             </nav>
-
-            <div class="mob-btn">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <div class="overlay"></div>
           
         </div><!-- menu -->
-        
-    
-    </div><!--content-->
 
 </header>
 
-<main class="main_content container">
-
-        
-    <section class="section-seu-codigo container">
-        
-        <div class="content">
+<main class="main">
             
             <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
 
@@ -192,15 +174,9 @@
 
             </div><!--Box Artigo 1 -->
 
-
-        <div class="clear"></div>
-          
-        </div>
-    </section><!--FECHA BOX HTML-->
-
 </main>
 
-<footer class="main_footer container">
+<footer class="main_footer">
     <div class="main_footer_copy">
         
         <p class="m-b-footer"> Grupo Assecont, todos os direitos reservados.</p> 
