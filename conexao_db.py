@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_db_connection():
+def conectar():
     db_config = {
         'host' : os.getenv('DB_HOST'),
         'user' : os.getenv('DB_USER'),

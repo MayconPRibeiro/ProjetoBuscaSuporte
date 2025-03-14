@@ -21,12 +21,11 @@ CREATE TABLE `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2;
 
+insert into usuarios(id, nome, usuario, senha) values ('', 'Maycon', 'teste', 'teste');
 
 
 use chamados;
-select * from categoria;
-select * from chamado;
 select * from chamados;
-select * from usuario;
+select * from usuarios;
 
 
