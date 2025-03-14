@@ -1,11 +1,17 @@
 from flask import Flask, render_template, request
 from flask import redirect, url_for
+import conexao_db
 
 app = Flask(__name__) #objeto flask
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+    #return render_template("index.html")
+    return render_template("pagina_inicial.html")
 
 @app.route("/pagina_inicial", methods=['POST', 'GET'])
 def pagina_inicial():
