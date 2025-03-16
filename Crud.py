@@ -20,3 +20,4 @@ def consultar():
     except Exception as erro:
         return('Ops...' + str(erro))
 
+consultar()
