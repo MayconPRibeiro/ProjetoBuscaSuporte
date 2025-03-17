@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request
 from flask import redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request, flash
 from conexao_db import conectar
 
-app = Flask(__name__) #objeto flask
 
-@app.route("/")
+app = Flask(__name__) #objeto flask
+app.secret_key = 'ASDB1578963' #chave secreta
+
+@app.route("/", methods = ['POST', 'GET'])
 def index():
     if request.method == 'POST':
         username = request.form['username']
@@ -49,13 +52,20 @@ def novo_conteudo():
 
 @app.route("/sugestao", methods=['POST', 'GET'])
 def sugestao():
+
+    msg = ''
+
     if request.method=='POST':
         nome = request.form['titulo']
         descricao = request.form['descricao']
         email = request.form['email']
+    try:
+        pass
 
-        return render_template("sugestao.html", msg = 'Enviado com sucesso!')
-    return render_template("sugestao.html")
+    except Exception as erro:
+        msg = f"Erro ao enviar sugestão: {str(erro)}"
+
+    return render_template("sugestao.html", msg = 'Enviado com sucesso!')
         
     
 

@@ -123,6 +123,34 @@
       <label for="titulo">Título</label>
       <input type="text" id="titulo" name="titulo" maxlength="150" placeholder="Digite o título"/><br />
 
+      <label for="categoria">Categoria</label>
+      <select name="categoria" id="categoria">
+        <option value="RELOGIO">RELOGIO</option>
+        <option value="ERRO SQL">ERRO SQL</option>
+        <option value="CLT">CLT</option>
+        <option value="Banco de Horas">Banco de Horas</option>
+        <option value="INICIAR SERVICO">INICIAR SERVICO</option>
+        <option value="RESTAURAR BANCO">RESTAURAR BANCO</option>
+        <option value="CRIAR ESTACAO">CRIAR ESTACAO</option>
+        <option value="MARCACOES DO DIA">MARCACOES DO DIA</option>
+        <option value="MARCACOES NOTURNAS">MARCACOES NOTURNAS</option>
+        <option value="PARAMETROS DO SISTEMA">PARAMETROS DO SISTEMA</option>
+        <option value="FAIXA DE CALCULO">FAIXA DE CALCULO</option>
+        <option value="COMPENSACAO">COMPENSACAO</option>
+        <option value="ROTINAS DE TRATAMENTO">ROTINAS DE TRATAMENTO</option>
+        <option value="ASSEFIN">ASSEFIN</option>
+        <option value="COMANDOS">COMANDOS</option>
+        <option value="ESCALA">ESCALA</option>
+        <option value="APONTAMENTO">APONTAMENTO</option>
+        <option value="RELATORIOS">RELATORIOS</option>
+        <option value="IMPORTAR PLANILHA">PLANILHA</option>
+        <option value="INSTALAR SQL">INSTALAR SQL</option>
+        <option value="TREINAMENTO">TREINAMENTO</option>
+        <option value="CADASTRO DE FUNCIONARIO">CADASTRO DE FUNCIONARIO</option>
+        <option value="REDES">REDES</option>
+        <option value="UTILIDADES">UTILIDADES</option>
+      </select>
+
       <label for="descricao">Descrição</label>
       <textarea
         id="descricao"
@@ -140,9 +168,6 @@
 
       <input type="radio" name="permissoes" id="suporte" value="suporte" />
       <label for="suporte">Apenas Suporte</label><br />
-
-      <input type="radio" name="permissoes" id="clientes" value="clientes" />
-      <label for="clientes">Apenas Clientes</label><br />
 
       <input type="radio" name="permissoes" id="todos" value="todos" />
       <label for="todos">Todos</label><br />

@@ -473,3 +473,22 @@ textarea {
 #titulo_h2{
   margin-top: 1%;
 }
+
+/*<select> */
+select {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px; /* Espaçamento entre os campos */
+  border: 1px solid #ddd; /* Borda suave */
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9; /* Fundo claro */
+  transition: all 0.3s ease;
+}
+
+select:focus {
+  border-color: #0553a5; /* Azul para foco */
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(5, 83, 165, 0.3);
+  outline: none;
+}

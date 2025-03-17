@@ -140,6 +140,12 @@
     </form>
 
     <script>
+
+      var msg = "{{msg}}";
+      if(msg){
+        alert(msg);
+      }
+
       const textarea = document.getElementById("descricao");
 
       textarea.addEventListener("input", function () {
