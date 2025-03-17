@@ -119,7 +119,7 @@
 </header>
 
     <h2 id="titulo_h2" >Novo Conteúdo</h2>
-    <form class="form">
+    <form class="form" method="POST">
       <label for="titulo">Título</label>
       <input type="text" id="titulo" name="titulo" maxlength="150" placeholder="Digite o título"/><br />
 
@@ -151,6 +151,13 @@
     </form>
 
     <script>
+
+      var msg = "{{ msg }}";
+
+      if(msg){
+        alert(msg);
+      }
+
       const textarea = document.getElementById("descricao");
 
       textarea.addEventListener("input", function () {
@@ -171,6 +178,7 @@
         const restante = maxLength - caracteresDigitados;
         caracteresRestantes.textContent = `${restante} caracteres restantes`;
       });
+      
     </script>
   </body>
 </html>

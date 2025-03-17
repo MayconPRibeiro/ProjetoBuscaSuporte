@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from flask import redirect, url_for
-import conexao_db
+from conexao_db import conectar
 
 app = Flask(__name__) #objeto flask
 
@@ -19,16 +19,33 @@ def pagina_inicial():
 
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
 def novo_conteudo():
+
+    msg = ""
+
     if request.method == 'POST':
         titulo = request.form['titulo']
         descricao = request.form['descricao']
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
+        #Implementar pegar horario automaticamente
 
-        #Implementar conectar e inserir no banco
+        try:
+            conn = conectar()
+            cursor = conn.cursor()
 
-        return render_template("novo_conteudo.html", msg='Salvo com sucesso!')
-    return render_template("novo_conteudo.html")
+            sql = 'INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)'
+
+            cursor.execute(sql, (titulo, descricao, nome_tecnico, permissoes))
+            conn.commit()
+            cursor.close()
+            conn.close()
+
+            msg = "Salvo com sucesso!"
+        
+        except Exception as erro:
+            msg = f"Erro ao salvar: {str(erro)}"
+
+    return render_template("novo_conteudo.html", msg=msg)
 
 @app.route("/sugestao", methods=['POST', 'GET'])
 def sugestao():
