@@ -82,9 +82,7 @@ def novo_conteudo():
             conn = conectar()
             cursor = conn.cursor()
 
-            sql = 'INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)'
-
-            cursor.execute(sql, (titulo, descricao, nome_tecnico, permissoes))
+            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes))
             conn.commit()
             cursor.close()
             conn.close()
@@ -115,11 +113,27 @@ def sugestao():
 
 @app.route("/cadastrar", methods=['POST', 'GET'])
 def cadastrar():
+
+    msg = ''
+
     if request.method == 'POST':
         nome = request.form['nome']
         tipo = request.form['tipo']
         email = request.form['email']
         senha = request.form['senha']
+    
+    try:
+        
+        conn = conectar()
+        cursor = conn.cursor()
+        cursor.execute('INSERT INTO usuarios(nome, email, senha, role) VALUES (%s, %s, %s, %s)', (nome, email, senha, tipo))
+
+        msg = 'Cadastrado com Sucesso!'
+
+    except Exception as erro:
+        msg = f'Ops, houve um erro: {str(erro)}'
+
+    return render_template("cadastrar.html", msg=msg)
 
 
 if __name__ == "__main__":
