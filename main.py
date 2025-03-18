@@ -36,7 +36,7 @@ def index():
             flash("Seja Bem Vindo(a)!", "sucesso")
 
         if user['role'] == 'gestor':
-            return redirect(url_for('pagina_inicial'))
+            return redirect(url_for('pagina_inicial_gestor'))
         elif user['role'] == 'tecnico':
             return redirect(url_for('pagina_inicial_tecnico'))
         elif user['role'] == 'cliente':
@@ -44,8 +44,18 @@ def index():
         
         else:
             flash('Login ou Senha inválido', 'sem sucesso')
-    #return render_template("index.html")
-    return render_template("pagina_inicial.html")
+    return render_template("index.html")
+    #return render_template("pagina_inicial.html")
+
+@app.route("/pagina_inicial")
+@login_required
+def pagina_inicial():
+    if current_user.role == "gestor":
+        return render_template("pagina_inicial_gestor")
+    elif current_user.role == "tecnico":
+        return render_template("pagina_inicial_tecnico")
+    else:
+        return redirect(url_for("index"))
 
 
 @app.route("/pagina_inicial_tecnico")
@@ -56,15 +66,27 @@ def pagina_inicial_tecnico():
     else:
         return redirect(url_for("index"))
 
+@app.route("/pagina_inicial_cliente")
+@login_required
+def pagina_inicial_cliente():
+    if current_user.role == "cliente":
+        return render_template("pagina_inicial_cliente.html")
+    else:
+        return redirect(url_for("index"))
+        
+@app.route("pagina_inicial_gestor")
+@login_required
+def pagina_inicial_gestor():
+    if current_user.role == "gestor":
+        return render_template("pagina_inicial_gestor.html")
+    else:
+        return redirect(url_for("index"))
+
 @app.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
-
-@app.route("/pagina_inicial", methods=['POST', 'GET'])
-def pagina_inicial():
-    return render_template("pagina_inicial.html")
 
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
 def novo_conteudo():
