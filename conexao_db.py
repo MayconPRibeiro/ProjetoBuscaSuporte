@@ -20,9 +20,7 @@ def conectar():
         return connection
 
     except mysql.connector.Error as err:
-        print(f"Erro de conexão: {err}")
-        return None
+        return f"Erro de conexão: {err}"
 
     except Exception as e:
-        print(f"Erro inesperado ao tentar conectar: {e}")
-        return None
+        return f"Erro inesperado ao tentar conectar: {e}"

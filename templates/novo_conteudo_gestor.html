@@ -31,7 +31,7 @@
             
               <ul>
                 
-                <li><a href="{{url_for('pagina_inicial_gestor')}}" title="Home">Inicio</a></li>
+                <li><a href="{{url_for('pagina_inicial')}}" title="Home">Inicio</a></li>
 
                 </li>
 
@@ -107,7 +107,7 @@
                 </li>
 
                 <li><a href="#" title="">Manuais</a></li>
-                <li><a href="{{ url_for('novo_conteudo_gestor')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
+                <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
                 <li><a href="{{ url_for('cadastrar')}}" title="cadastar">Cadastrar</a></li>
               
               </ul>
@@ -118,133 +118,80 @@
 
 </header>
 
-<main class="main">
-            
-            <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
+    <h2 id="titulo_h2" >Novo Conteúdo</h2>
+    <form class="form" method="POST">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo" name="titulo" maxlength="150" placeholder="Digite o título"/><br />
 
-            <div class="search">
-              <input type="search" id="txtBuscar" placeholder="Digite sua Pesquisa">
-            </div>
-            
-            <div class="box-artigo">
-                
-                <div id="espaco1">
+      <label for="categoria">Categoria</label>
+      <select name="categoria" id="categoria">
+        <option value="ERRO SQL">ERRO SQL</option>
+        <option value="MARCACOES DO DIA">MARCACOES DO DIA</option>
+        <option value="MARCACOES NOTURNAS">MARCACOES NOTURNAS</option>
+        <option value="PARAMETROS DO SISTEMA">PARAMETROS DO SISTEMA</option>
+        <option value="FAIXA DE CALCULO">FAIXA DE CALCULO</option>
+        <option value="ASSEFIN">ASSEFIN</option>
+        <option value="COMANDOS">COMANDOS</option>
+        <option value="ESCALA">ESCALA</option>
+        <option value="APONTAMENTO">APONTAMENTO</option>
+        <option value="RELATORIOS">RELATORIOS</option>
+        <option value="REDES">REDES</option>
+        <option value="UTILIDADES">UTILIDADES</option>
+      </select>
 
-                  <!--Espaço 1-->
+      <label for="descricao">Descrição</label>
+      <textarea
+        id="descricao"
+        name="descricao"
+        rows="4"
+        maxlength="700"
+        placeholder="Digite aqui o novo procedimento"
+      ></textarea>
+      <p id="caracteresRestantes">700 caracteres restantes</p>
 
-                  <h2 id="tituloEspaco">Últimas Atualizações Asseponto</h2><br><br>
+      <label for="nome_tecnico">Seu nome</label>
+      <input type="text" id="nome_tecnico" name="nome_tecnico" maxlength="150" placeholder="Seu nome"/><br />
 
+      <label for="tipo_de_procedimento">Permissões</label><br />
 
-                  <a id="linkPoupUp" href="#openModal">[Atualização] AssepontoWEB Exemplo</a>
+      <input type="radio" name="permissoes" id="suporte" value="suporte" />
+      <label for="suporte">Apenas Suporte</label><br />
 
-                  <div id="openModal" class="modalDialog">
-                    <div>
-                      <a href="#close" title="Close" class="close">X</a>
-                      <h2>Título</h2>
-                      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor beatae reprehenderit quos unde nihil adipisci repudiandae velit! Inventore fuga blanditiis atque esse cupiditate, itaque nemo, perspiciatis, necessitatibus consequatur expedita eos?</p>
-                    </div>
-                  </div>
+      <input type="radio" name="permissoes" id="todos" value="todos" />
+      <label for="todos">Todos</label><br />
 
-                  <!--FIM Espaço 1-->
+      <button type="submit">Enviar</button>
+    </form>
 
-                </div>
+    <script>
 
-                <div id="esapco2">
+      var msg = "{{ msg }}";
 
-                  <!--Espaço 2-->
-
-                  <h2 id="tituloEspaco">Últimas Postagens</h2><br><br>
-
-
-                  <a id="linkPoupUp" href="#openModal">[Nova função] Desbloqueio Control ID via Assebot</a>
-
-                  <div id="openModal" class="modalDialog">
-                    <div>
-                      <a href="#close" title="Close" class="close">X</a>
-                      <h2>Título</h2>
-                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae accusantium excepturi adipisci rem debitis non libero fugiat. Corrupti repellat velit ipsum officia maiores assumenda aliquid molestiae debitis, expedita quaerat?</p>
-
-                    </div>
-                  </div>
-                  
-                  <!--FIM Espaço 2-->
-
-                </div>
-              
-
-            </div><!--Box Artigo 1 -->
-
-</main>
-
-<footer class="main_footer">
-    <div class="main_footer_copy">
-        
-        <p class="m-b-footer"> Grupo Assecont, todos os direitos reservados.</p> 
-        <p class="by"><i></i> Desenvolvido por: RESOLVEDORES <a href="" title="Templates Html" target="_blank"></a></p>
-    
-    </div>
-
-    <!-- API Acessibilidade -->
-    
-</footer>
-
-<script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
-<script src="{{ url_for('static', filename='js/script.js')}}"></script>
-<script>
-    
-    //Menu
-    $(".main-nav ul li:has(ul)").addClass("submenu");
-    $(".main-nav ul li:has(ul)").append("<i></i>");
-    $(".main-nav ul i").click(function() {
-      $(this)
-        .parent("li")
-        .toggleClass("open");
-      $(this)
-        .parent("li")
-        .children("ul")
-        .slideToggle();
-    });
-
-    //Menu Mobile
-    $(".mob-btn").click(function() {
-      if (!$("html").hasClass("show-menu")) {
-        $("html").addClass("show-menu");
-      } else {
-        $("html").removeClass("show-menu");
+      if(msg){
+        alert(msg);
       }
-    });
 
-    $(".overlay").click(function() {
-      if ($("html").hasClass("show-menu")) {
-        $("html").removeClass("show-menu");
-      }
-    });
+      const textarea = document.getElementById("descricao");
 
-    //Aparecer addClass
-    $(".first ul")
-    
-      .clone()
-      .prependTo(".main-nav")
-      .addClass("desk-hide");
+      textarea.addEventListener("input", function () {
+        // Reseta a altura do campo antes de ajustar
+        this.style.height = "auto";
+        // Ajusta a altura conforme o conteúdo
+        this.style.height = this.scrollHeight + "px";
+      });
 
-    $(".last ul")
-    
-      .clone()
-      .appendTo(".main-nav")
-      .addClass("desk-hide");
+      const descricao = document.getElementById("descricao");
+      const caracteresRestantes = document.getElementById(
+        "caracteresRestantes"
+      );
+      const maxLength = descricao.getAttribute("maxlength");
 
-</script>
-<body class="mat-typography">
-  <app-root></app-root>
-  <div vw class="enabled">
-    <div vw-access-button class="active"></div>
-    <div vw-plugin-wrapper>
-      <div class="vw-plugin-top-wrapper"></div>
-    </div>
-  </div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>
-    new window.VLibras.Widget('https://vlibras.gov.br/app');
-  </script>
-</body>
+      descricao.addEventListener("input", function () {
+        const caracteresDigitados = descricao.value.length;
+        const restante = maxLength - caracteresDigitados;
+        caracteresRestantes.textContent = `${restante} caracteres restantes`;
+      });
+      
+    </script>
+  </body>
 </html>

@@ -1,10 +1,16 @@
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from conexao_db import conectar
 from login import User, load_user
 from flask_login import LoginManager
+from conexao_db import conectar
 
+import mysql.connector
+import os
+from flask import current_app
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__) #objeto flask
 app.secret_key = 'ASDB1578963' #chave secreta
@@ -24,8 +30,13 @@ def index():
         password = request.form['password']
 
         conn = conectar()
+
+        if isinstance(conn, str):
+            flash(conn, 'erro')
+            return render_template("index.html")
+
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email))
         user = cursor.fetchone()
         cursor.close()
         conn.close()
@@ -45,7 +56,7 @@ def index():
         else:
             flash('Login ou Senha inválido', 'sem sucesso')
     return render_template("index.html")
-    #return render_template("pagina_inicial.html")
+    #return render_template("pagina_inicial_gestor.html")
 
 @app.route("/pagina_inicial")
 @login_required
@@ -89,7 +100,10 @@ def logout():
     return redirect(url_for('index'))
 
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
+@login_required
 def novo_conteudo():
+    if current_user.role == "gestor":
+        return redirect(url_for('novo_conteudo_gestor'))
 
     msg = ""
 
@@ -98,23 +112,50 @@ def novo_conteudo():
         descricao = request.form['descricao']
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
-        #Implementar pegar horario automaticamente
+        # Implementar pegar horario automaticamente
 
         try:
             conn = conectar()
             cursor = conn.cursor()
-
             cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes))
             conn.commit()
             cursor.close()
             conn.close()
-
             msg = "Salvo com sucesso!"
         
         except Exception as erro:
             msg = f"Erro ao salvar: {str(erro)}"
 
     return render_template("novo_conteudo.html", msg=msg)
+
+@app.route("/novo_conteudo_gestor", methods=['POST', 'GET'])
+@login_required
+def novo_conteudo_gestor():
+    if current_user.role != "gestor":
+        return redirect(url_for('novo_conteudo'))
+
+    msg = ""
+
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        descricao = request.form['descricao']
+        nome_tecnico = request.form['nome_tecnico']
+        permissoes = request.form['permissoes']
+        # Implementar pegar horario automaticamente
+
+        try:
+            conn = conectar()
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            msg = "Salvo com sucesso!"
+        
+        except Exception as erro:
+            msg = f"Erro ao salvar: {str(erro)}"
+
+    return render_template("novo_conteudo_gestor.html", msg=msg)
 
 @app.route("/sugestao", methods=['POST', 'GET'])
 def sugestao():
