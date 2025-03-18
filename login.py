@@ -1,12 +1,5 @@
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-import conexao_db
-from flask import Flask, render_template, redirect, url_for, request, flash
-from main import app
+from flask_login import LoginManager, UserMixin
 from conexao_db import conectar
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = "index"
 
 class User(UserMixin):
     def __init__(self, id, email, role):
@@ -14,7 +7,6 @@ class User(UserMixin):
         self.email = email
         self.role = role
 
-@login_manager.user_loader
 def load_user(user_id):
     conn = conectar()
     cursor = conn.cursor(dictionary = True)

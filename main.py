@@ -1,13 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for
 from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_login import login_user, login_required, logout_user, current_user
-from werkzeug import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from conexao_db import conectar
-from login import current_user, User, login_manager
+from login import User, load_user
+from flask_login import LoginManager
 
 
 app = Flask(__name__) #objeto flask
 app.secret_key = 'ASDB1578963' #chave secreta
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "index"
+
+@login_manager.user_loader
+def load_user_by_id(user_id):
+    return load_user(user_id)
 
 @app.route("/", methods = ['POST', 'GET'])
 def index():
