@@ -113,6 +113,14 @@ def sugestao():
 
     return render_template("sugestao.html", msg = 'Enviado com sucesso!')
 
+@app.route("/cadastrar", methods=['POST', 'GET'])
+def cadastrar():
+    if request.method == 'POST':
+        nome = request.form['nome']
+        tipo = request.form['tipo']
+        email = request.form['email']
+        senha = request.form['senha']
+
 
 if __name__ == "__main__":
     app.run(debug=True)
