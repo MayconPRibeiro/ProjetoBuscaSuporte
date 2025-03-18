@@ -74,7 +74,7 @@ def pagina_inicial_cliente():
     else:
         return redirect(url_for("index"))
         
-@app.route("pagina_inicial_gestor")
+@app.route("/pagina_inicial_gestor")
 @login_required
 def pagina_inicial_gestor():
     if current_user.role == "gestor":
