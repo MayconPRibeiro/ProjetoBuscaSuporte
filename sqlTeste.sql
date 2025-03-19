@@ -4,9 +4,9 @@ USE testeBusca;
 CREATE TABLE usuarios(
 	id int not null auto_increment primary key,
     nome varchar(150) not null,
-    tipo ENUM('gestor', 'suporte', 'cliente'),
-    email varchar(150) not null,
-    senha varchar(50) not null
+    tipo varchar(150) not null,
+    email varchar(150) not null unique,
+    senha varchar(255) not null
 );
 
 INSERT INTO usuarios(nome, tipo, email, senha) VALUES ('Maycon Teste', 'gestor', 'gestor@teste.com', 'teste');

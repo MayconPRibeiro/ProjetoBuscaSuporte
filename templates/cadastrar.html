@@ -109,6 +109,7 @@
                 <li><a href="#" title="">Manuais</a></li>s
                 <li><a href="{{ url_for('novo_conteudo')}}" title="adicionar_conteudo" >Adicionar conteúdo</a></li>
                 <li><a href="{{ url_for('cadastrar')}}" title="cadastar">Cadastrar</a></li>
+                <li><a href="{{ url_for('logout')}}" title="logout">Sair</a></li>
               
               </ul>
             
@@ -118,15 +119,26 @@
 
 </header>
 
-    <h2 id="titulo_h2" >Novo Conteúdo</h2>
+    <h2 id="titulo_h2" >Novo Usuário</h2>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          <ul>
+          {% for category, message in messages %}
+              <li><strong>{{ category }}:</strong> {{ message }}</li>
+          {% endfor %}
+          </ul>
+      {% endif %}
+    {% endwith %}
+
     <form class="form" method="POST">
       <label for="nome">Nome</label>
       <input type="text" id="nome" name="nome" maxlength="150" placeholder="Digite o Nome"/><br />
 
-      <label for="role">Tipo de Usuário</label>
-      <select name="role" id="role">
+      <label for="tipo">Tipo de Usuário</label>
+      <select name="tipo" id="tipo">
         <option value="gestor">GESTOR</option>
-        <option value="suporte">SUPORTE</option>
+        <option value="tecnico">SUPORTE</option>
         <option value="cliente">CLIENTE</option>
       </select>
 
@@ -134,7 +146,7 @@
       <input type="email" id="email" name="email" maxlength="150" placeholder="exemplo@exemplo.com"/><br />
 
       <label for="senha">Senha</label>
-      <input type="password" name="senha" id="senha" maxlength="50" placeholder="Senha inicial">
+      <input type="text" name="senha" id="senha" maxlength="50" placeholder="Senha inicial">
 
       <button type="submit">Enviar</button>
     </form>

@@ -27,7 +27,7 @@ def load_user_by_id(user_id):
 def index():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        senha = request.form['senha']
 
         conn = conectar()
 
@@ -36,34 +36,36 @@ def index():
             return render_template("index.html")
 
         cursor = conn.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email))
+        cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
         user = cursor.fetchone()
+        
         cursor.close()
         conn.close()
 
-        if user and check_password_hash(user['password'], password):
-            user_obj = User(id=user['id'], email=user['email'], role=user['role'])
+        if user and check_password_hash(user['senha'], senha):
+            user_obj = User(id=user['id'], email=user['email'], tipo=user['tipo'])
             login_user(user_obj)
             flash("Seja Bem Vindo(a)!", "sucesso")
 
-        if user['role'] == 'gestor':
+        if user['tipo'] == 'gestor':
             return redirect(url_for('pagina_inicial_gestor'))
-        elif user['role'] == 'tecnico':
+        elif user['tipo'] == 'tecnico':
             return redirect(url_for('pagina_inicial_tecnico'))
-        elif user['role'] == 'cliente':
+        elif user['tipo'] == 'cliente':
             return redirect(url_for('pagina_inicial_cliente'))
         
         else:
             flash('Login ou Senha inválido', 'sem sucesso')
+
     return render_template("index.html")
     #return render_template("pagina_inicial_gestor.html")
 
 @app.route("/pagina_inicial")
 @login_required
 def pagina_inicial():
-    if current_user.role == "gestor":
+    if current_user.tipo == "gestor":
         return render_template("pagina_inicial_gestor")
-    elif current_user.role == "tecnico":
+    elif current_user.tipo == "tecnico":
         return render_template("pagina_inicial_tecnico")
     else:
         return redirect(url_for("index"))
@@ -72,7 +74,7 @@ def pagina_inicial():
 @app.route("/pagina_inicial_tecnico")
 @login_required
 def pagina_inicial_tecnico():
-    if current_user.role == "tecnico":
+    if current_user.tipo == "tecnico":
         return render_template("pagina_inicial_tecnico.html")
     else:
         return redirect(url_for("index"))
@@ -80,7 +82,7 @@ def pagina_inicial_tecnico():
 @app.route("/pagina_inicial_cliente")
 @login_required
 def pagina_inicial_cliente():
-    if current_user.role == "cliente":
+    if current_user.tipo == "cliente":
         return render_template("pagina_inicial_cliente.html")
     else:
         return redirect(url_for("index"))
@@ -88,7 +90,7 @@ def pagina_inicial_cliente():
 @app.route("/pagina_inicial_gestor")
 @login_required
 def pagina_inicial_gestor():
-    if current_user.role == "gestor":
+    if current_user.tipo == "gestor":
         return render_template("pagina_inicial_gestor.html")
     else:
         return redirect(url_for("index"))
@@ -102,7 +104,7 @@ def logout():
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
 @login_required
 def novo_conteudo():
-    if current_user.role == "gestor":
+    if current_user.tipo == "gestor":
         return redirect(url_for('novo_conteudo_gestor'))
 
     msg = ""
@@ -131,7 +133,7 @@ def novo_conteudo():
 @app.route("/novo_conteudo_gestor", methods=['POST', 'GET'])
 @login_required
 def novo_conteudo_gestor():
-    if current_user.role != "gestor":
+    if current_user.tipo != "gestor":
         return redirect(url_for('novo_conteudo'))
 
     msg = ""
@@ -176,7 +178,6 @@ def sugestao():
 
 @app.route("/cadastrar", methods=['POST', 'GET'])
 def cadastrar():
-
     msg = ''
 
     if request.method == 'POST':
@@ -184,19 +185,40 @@ def cadastrar():
         tipo = request.form['tipo']
         email = request.form['email']
         senha = request.form['senha']
-    
-    try:
-        
-        conn = conectar()
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO usuarios(nome, email, senha, role) VALUES (%s, %s, %s, %s)', (nome, email, senha, tipo))
 
-        msg = 'Cadastrado com Sucesso!'
+        if not nome or not tipo or not email or not senha:
+            flash("Todos os campos são obrigatórios", "erro")
+            return redirect(url_for('cadastrar'))
 
-    except Exception as erro:
-        msg = f'Ops, houve um erro: {str(erro)}'
+        try:
+            conn = conectar()
+            cursor = conn.cursor(dictionary=True)
+
+            cursor.execute("SELECT * FROM usuarios WHERE email = %s", (email,))
+            existing_user = cursor.fetchone()
+
+            if existing_user:
+                flash("Este email já está registrado", "erro")
+                conn.close()
+                return redirect(url_for('cadastrar'))
+            
+            
+            hashed_password = generate_password_hash(senha)
+            cursor.execute('INSERT INTO usuarios(nome, tipo, email, senha) VALUES (%s, %s, %s, %s)', (nome, tipo, email, hashed_password))
+
+            conn.commit()
+
+            msg = 'Cadastrado com Sucesso!'
+
+        except Exception as erro:
+            msg = f'Ops, houve um erro: {str(erro)}'
+            print(f"Erro: {erro}")
+
+        finally:
+            conn.close()
 
     return render_template("cadastrar.html", msg=msg)
+
 
 
 if __name__ == "__main__":
