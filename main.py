@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from login import User, load_user
@@ -29,6 +29,10 @@ def index():
         email = request.form['email']
         senha = request.form['senha']
 
+        if not email or not senha:
+            flash('Todos os campos são obrigatórios','erro')
+            return redirect (url_for('index'))
+
         conn = conectar()
 
         if isinstance(conn, str):
@@ -47,15 +51,19 @@ def index():
             login_user(user_obj)
             flash("Seja Bem Vindo(a)!", "sucesso")
 
-        if user['tipo'] == 'gestor':
-            return redirect(url_for('pagina_inicial_gestor'))
-        elif user['tipo'] == 'tecnico':
-            return redirect(url_for('pagina_inicial_tecnico'))
-        elif user['tipo'] == 'cliente':
-            return redirect(url_for('pagina_inicial_cliente'))
-        
+            if current_user.tipo == 'gestor':
+                return redirect(url_for('pagina_inicial_gestor'))
+            elif current_user.tipo == 'tecnico':
+                return redirect(url_for('pagina_inicial_tecnico'))
+            elif current_user.tipo == 'cliente':
+                return redirect(url_for('pagina_inicial_cliente'))
+            
+            else:
+                flash('Ops, Algo deu errado', 'erro')
+                return redirect(url_for('index'))
+
         else:
-            flash('Login ou Senha inválido', 'sem sucesso')
+            flash('Login ou Senha inválidos', 'erro')
 
     return render_template("index.html")
     #return render_template("pagina_inicial_gestor.html")
@@ -63,10 +71,14 @@ def index():
 @app.route("/pagina_inicial")
 @login_required
 def pagina_inicial():
+
+    
     if current_user.tipo == "gestor":
-        return render_template("pagina_inicial_gestor")
+        return render_template("pagina_inicial_gestor.html")
     elif current_user.tipo == "tecnico":
-        return render_template("pagina_inicial_tecnico")
+        return render_template("pagina_inicial_tecnico.html")
+    elif current_user.tipo == "cliente":
+        return render_template("pagina_inicial_cliente.html")
     else:
         return redirect(url_for("index"))
 
@@ -99,6 +111,7 @@ def pagina_inicial_gestor():
 @login_required
 def logout():
     logout_user()
+    session.clear()
     return redirect(url_for('index'))
 
 @app.route("/novo_conteudo", methods=['POST', 'GET'])
@@ -135,6 +148,7 @@ def novo_conteudo():
 def novo_conteudo_gestor():
     if current_user.tipo != "gestor":
         return redirect(url_for('novo_conteudo'))
+    
 
     msg = ""
 
@@ -160,6 +174,7 @@ def novo_conteudo_gestor():
     return render_template("novo_conteudo_gestor.html", msg=msg)
 
 @app.route("/sugestao", methods=['POST', 'GET'])
+@login_required
 def sugestao():
 
     msg = ''
@@ -168,6 +183,11 @@ def sugestao():
         nome = request.form['titulo']
         descricao = request.form['descricao']
         email = request.form['email']
+
+        if not nome or not descricao or not email:
+            flash("Todos os campos são obrigatórios", "erro")
+            return redirect(url_for('sugestao'))
+        
     try:
         pass
 
@@ -177,8 +197,13 @@ def sugestao():
     return render_template("sugestao.html", msg = 'Enviado com sucesso!')
 
 @app.route("/cadastrar", methods=['POST', 'GET'])
+@login_required
 def cadastrar():
     msg = ''
+
+    if current_user.tipo != 'gestor':
+        flash('Você não tem permissão para acessar essa página', 'erro')
+        return redirect(url_for('pagina_inicial'))
 
     if request.method == 'POST':
         nome = request.form['nome']

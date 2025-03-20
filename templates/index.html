@@ -31,8 +31,7 @@
             
     <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
 
-        <!-- Exibindo mensagens flash -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul>
                 {% for category, message in messages %}

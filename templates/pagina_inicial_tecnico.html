@@ -119,7 +119,15 @@
 </header>
 
 <main class="main">
-            
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+          <ul>
+          {% for category, message in messages %}
+              <li><strong>{{ category }}:</strong> {{ message }}</li>
+          {% endfor %}
+          </ul>
+      {% endif %}
+    {% endwith %}
             <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
 
             <div class="search">
