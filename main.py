@@ -119,6 +119,9 @@ def logout():
 def novo_conteudo():
     if current_user.tipo == "gestor":
         return redirect(url_for('novo_conteudo_gestor'))
+    if current_user.tipo == "cliente":
+        flash('Você não tem permissão para acessar essa página', 'erro')
+        return redirect(url_for('pagina_inicial'))
 
     msg = ""
 
@@ -128,6 +131,8 @@ def novo_conteudo():
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
         # Implementar pegar horario automaticamente
+        # Implementar pegar nome e email automaticamente
+
 
         try:
             conn = conectar()
@@ -146,8 +151,11 @@ def novo_conteudo():
 @app.route("/novo_conteudo_gestor", methods=['POST', 'GET'])
 @login_required
 def novo_conteudo_gestor():
-    if current_user.tipo != "gestor":
+    if current_user.tipo == "tecnico":
         return redirect(url_for('novo_conteudo'))
+    if current_user.tipo != "gestor":
+        flash('Você não tem permissão para acessar essa página', 'erro')
+        return redirect(url_for('pagina_inicial'))
     
 
     msg = ""
@@ -172,6 +180,39 @@ def novo_conteudo_gestor():
             msg = f"Erro ao salvar: {str(erro)}"
 
     return render_template("novo_conteudo_gestor.html", msg=msg)
+
+@app.route("/editar_conteudo", methods=['POST', 'GET'])
+@login_required
+def editar_conteudo():
+    if current_user.tipo != "gestor":
+        flash('Você não tem permissão para acessar essa página', 'erro')
+        return redirect(url_for('pagina_inicial'))
+
+    msg = ""
+
+    if request.method == 'POST':
+        id = request.form['id']
+        categoria = request.form['categoria']
+        titulo = request.form['titulo']
+        descricao = request.form['descricao']
+        nome_tecnico = request.form['nome_tecnico']
+        permissoes = request.form['permissoes']
+        # Implementar pegar horario automaticamente
+        
+
+        try:
+            conn = conectar()
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO conteudo (titulo, categoria, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s, %s)', (titulo, categoria, descricao, nome_tecnico, permissoes))
+            conn.commit()
+            cursor.close()
+            conn.close()
+            msg = "Salvo com sucesso!"
+        
+        except Exception as erro:
+            msg = f"Erro ao salvar: {str(erro)}"
+
+    return render_template("editar_conteudo.html", msg=msg)
 
 @app.route("/sugestao", methods=['POST', 'GET'])
 @login_required

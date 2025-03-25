@@ -13,6 +13,10 @@ INSERT INTO usuarios(nome, tipo, email, senha) VALUES ('Maycon Teste', 'gestor',
 
 select * from usuarios;
 
-CREATE USER 'teste@BD123'@'localhost' IDENTIFIED BY 'teste@BD123';
-GRANT ALL PRIVILEGES ON *.* TO 'teste@BD123'@'localhost' WITH GRANT OPTION;
-FLUSH PRIVILEGES;
+CREATE TABLE chamados(
+	id int not null auto_increment primary key,
+    titulo varchar(150) not null,
+    descricao varchar(700) not null,
+    nome_tecnico varchar(150) not null,
+    permissoes varchar(20) not null
+);
