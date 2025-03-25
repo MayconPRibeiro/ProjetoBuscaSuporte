@@ -177,7 +177,10 @@ def novo_conteudo_gestor():
 @login_required
 def sugestao():
 
-    msg = ''
+    flash("Essa página não existe!", "erro")
+    return redirect(url_for('pagina_inicial'))
+
+    '''msg = ''
 
     if request.method=='POST':
         nome = request.form['titulo']
@@ -194,7 +197,7 @@ def sugestao():
     except Exception as erro:
         msg = f"Erro ao enviar sugestão: {str(erro)}"
 
-    return render_template("sugestao.html", msg = 'Enviado com sucesso!')
+    return render_template("sugestao.html", msg = 'Enviado com sucesso!')'''
 
 @app.route("/cadastrar", methods=['POST', 'GET'])
 @login_required
