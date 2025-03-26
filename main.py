@@ -4,6 +4,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from login import User, load_user
 from flask_login import LoginManager
 from conexao_db import conectar
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import mysql.connector
 import os
@@ -47,7 +49,7 @@ def index():
         conn.close()
 
         if user and check_password_hash(user['senha'], senha):
-            user_obj = User(id=user['id'], email=user['email'], tipo=user['tipo'])
+            user_obj = User(id=user['id'], email=user['email'], tipo=user['tipo'], nome=user['nome'])
             login_user(user_obj)
             flash("Seja Bem Vindo(a)!", "sucesso")
 
@@ -128,7 +130,7 @@ def novo_conteudo():
     if request.method == 'POST':
         titulo = request.form['titulo']
         descricao = request.form['descricao']
-        nome_tecnico = request.form['nome_tecnico']
+        nome_tecnico = current_user.nome
         permissoes = request.form['permissoes']
         # Implementar pegar horario automaticamente
         # Implementar pegar nome e email automaticamente

@@ -2,10 +2,11 @@ from flask_login import LoginManager, UserMixin
 from conexao_db import conectar
 
 class User(UserMixin):
-    def __init__(self, id, email, tipo):
+    def __init__(self, id, email, tipo, nome):
         self.id = id
         self.email = email
         self.tipo = tipo
+        self.nome = nome
 
 def load_user(user_id):
     conn = conectar()
@@ -15,5 +16,5 @@ def load_user(user_id):
     cursor.close()
     conn.close()
     if user:
-        return User(user['id'], user['email'], user['tipo'])
+        return User(user['id'], user['email'], user['tipo'], user['nome'])
     return None

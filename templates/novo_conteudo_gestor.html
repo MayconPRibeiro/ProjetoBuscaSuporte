@@ -151,7 +151,7 @@
       <p id="caracteresRestantes">700 caracteres restantes</p>
 
       <label for="nome_tecnico">Seu nome</label>
-      <input type="text" id="nome_tecnico" name="nome_tecnico" maxlength="150" placeholder="Seu nome"/><br />
+      <input type="text" id="nome_tecnico" name="nome_tecnico" maxlength="150" value="{{ current_user.nome }}" readonly/><br />
 
       <label for="tipo_de_procedimento">Permissões</label><br />
 
