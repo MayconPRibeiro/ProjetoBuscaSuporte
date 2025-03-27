@@ -18,5 +18,6 @@ CREATE TABLE chamados(
     titulo varchar(150) not null,
     descricao varchar(700) not null,
     nome_tecnico varchar(150) not null,
-    permissoes varchar(20) not null
+    permissoes varchar(20) not null,
+    data_hora datetime not null
 );

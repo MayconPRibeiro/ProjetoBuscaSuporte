@@ -131,7 +131,7 @@ def novo_conteudo():
         descricao = request.form['descricao']
         nome_tecnico = current_user.nome
         permissoes = request.form['permissoes']
-        data_hora_atual = request.form['data_hora']
+        data_hora_atual = data_hora()
 
 
         try:
@@ -147,8 +147,9 @@ def novo_conteudo():
             msg = f"Erro ao salvar: {str(erro)}"
 
     data_hora_atual = data_hora()
+    data_hora_atual_exibir = data_hora_atual.strftime('%d-%m-%Y %H:%M')
 
-    return render_template("novo_conteudo.html", msg=msg, data_hora_atual=data_hora_atual)
+    return render_template("novo_conteudo.html", msg=msg, data_hora_atual_exibir=data_hora_atual_exibir)
 
 @app.route("/novo_conteudo_gestor", methods=['POST', 'GET'])
 @login_required
@@ -167,7 +168,7 @@ def novo_conteudo_gestor():
         descricao = request.form['descricao']
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
-        data_hora_atual = request.form['data_hora']
+        data_hora_atual = data_hora()
 
         try:
             conn = conectar()
@@ -182,8 +183,9 @@ def novo_conteudo_gestor():
             msg = f"Erro ao salvar: {str(erro)}"
 
     data_hora_atual = data_hora()
+    data_hora_atual_exibir = data_hora_atual.strftime('%Y-%m-%d %H:%M')
 
-    return render_template("novo_conteudo_gestor.html", msg=msg, data_hora_atual=data_hora_atual)
+    return render_template("novo_conteudo_gestor.html", msg=msg, data_hora_atual_exibir=data_hora_atual_exibir)
 
 @app.route("/editar_conteudo", methods=['POST', 'GET'])
 @login_required
