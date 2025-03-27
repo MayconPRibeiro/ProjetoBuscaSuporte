@@ -1,5 +1,8 @@
 import conexao_db
 import mysql.connector
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
 
 def consultar():
     try:
@@ -20,4 +23,9 @@ def consultar():
     except Exception as erro:
         return('Ops...' + str(erro))
 
-consultar()
+def data_hora():
+    fuso_horario = ZoneInfo('America/Sao_Paulo')
+    data_hora = datetime.now(fuso_horario)
+
+    return data_hora.strftime('%Y/%m/%dT%H:%M')
+

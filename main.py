@@ -4,8 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from login import User, load_user
 from flask_login import LoginManager
 from conexao_db import conectar
-from datetime import datetime
-from zoneinfo import ZoneInfo
+from Crud import data_hora
 
 import mysql.connector
 import os
@@ -15,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__) #objeto flask
-app.secret_key = 'ASDB1578963' #chave secreta
+app.secret_key = 'ASDB157;;8963' #chave secreta
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -132,14 +131,13 @@ def novo_conteudo():
         descricao = request.form['descricao']
         nome_tecnico = current_user.nome
         permissoes = request.form['permissoes']
-        # Implementar pegar horario automaticamente
-        # Implementar pegar nome e email automaticamente
+        data_hora_atual = request.form['data_hora']
 
 
         try:
             conn = conectar()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes))
+            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
             conn.commit()
             cursor.close()
             conn.close()
@@ -148,7 +146,9 @@ def novo_conteudo():
         except Exception as erro:
             msg = f"Erro ao salvar: {str(erro)}"
 
-    return render_template("novo_conteudo.html", msg=msg)
+    data_hora_atual = data_hora()
+
+    return render_template("novo_conteudo.html", msg=msg, data_hora_atual=data_hora_atual)
 
 @app.route("/novo_conteudo_gestor", methods=['POST', 'GET'])
 @login_required
@@ -167,12 +167,12 @@ def novo_conteudo_gestor():
         descricao = request.form['descricao']
         nome_tecnico = request.form['nome_tecnico']
         permissoes = request.form['permissoes']
-        # Implementar pegar horario automaticamente
+        data_hora_atual = request.form['data_hora']
 
         try:
             conn = conectar()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes))
+            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
             conn.commit()
             cursor.close()
             conn.close()
@@ -181,7 +181,9 @@ def novo_conteudo_gestor():
         except Exception as erro:
             msg = f"Erro ao salvar: {str(erro)}"
 
-    return render_template("novo_conteudo_gestor.html", msg=msg)
+    data_hora_atual = data_hora()
+
+    return render_template("novo_conteudo_gestor.html", msg=msg, data_hora_atual=data_hora_atual)
 
 @app.route("/editar_conteudo", methods=['POST', 'GET'])
 @login_required
