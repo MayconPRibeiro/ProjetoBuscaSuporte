@@ -1,7 +1,9 @@
-import conexao_db
+from conexao_db import conectar, conexao_db
 import mysql.connector
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from fuzzywuzzy import process
+
 
 
 def consultar():
@@ -28,3 +30,23 @@ def data_hora():
     data_hora = datetime.now(fuso_horario)
     return data_hora
 
+from fuzzywuzzy import process
+from conexao_db import conectar
+
+def get_titles_from_db(user_type):
+    conn = conectar()  # Conectar ao banco de dados
+    cursor = conn.cursor()
+
+    if user_type == 'cliente':
+        cursor.execute("SELECT titulo FROM chamados WHERE permissoes = 'todos'")
+
+    elif user_type == 'tecnico' or user_type == 'gestor':
+        cursor.execute("SELECT titulo FROM chamados WHERE permissoes IN ('todos', 'tecnico')")
+
+    titulos = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return titulos
+
+def fuzzy_search(search_term, titles, limit=5):
+    matches = process.extract(search_term, titles, limit=limit)
+    return matches

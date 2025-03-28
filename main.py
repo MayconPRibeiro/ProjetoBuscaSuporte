@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask import Flask, render_template, redirect, url_for, request, flash, session, jsonify
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from login import User, load_user
 from flask_login import LoginManager
 from conexao_db import conectar
-from Crud import data_hora
+from Crud import data_hora, get_titles_from_db, fuzzy_search
 
 import mysql.connector
 import os
@@ -88,7 +88,7 @@ def pagina_inicial():
 @login_required
 def pagina_inicial_tecnico():
     if current_user.tipo == "tecnico":
-        return render_template("pagina_inicial_tecnico.html")
+        return render_template("pagina_inicial_tecnico.html", user_type='tecnico')
     else:
         return redirect(url_for("index"))
 
@@ -96,7 +96,7 @@ def pagina_inicial_tecnico():
 @login_required
 def pagina_inicial_cliente():
     if current_user.tipo == "cliente":
-        return render_template("pagina_inicial_cliente.html")
+        return render_template("pagina_inicial_cliente.html", user_type='cliente')
     else:
         return redirect(url_for("index"))
         
@@ -104,9 +104,24 @@ def pagina_inicial_cliente():
 @login_required
 def pagina_inicial_gestor():
     if current_user.tipo == "gestor":
-        return render_template("pagina_inicial_gestor.html")
+        return render_template("pagina_inicial_gestor.html", user_type='gestor')
     else:
         return redirect(url_for("index"))
+
+@app.route('/search', methods=['GET'])
+def search():
+    search_term = request.args.get('q', '')  # Captura o termo de busca
+    user_type = current_user.tipo  # Obtém o tipo de usuário diretamente do current_user
+    
+    # Busca os títulos com base na permissão do usuário
+    titles = get_titles_from_db(user_type)
+    
+    # Realiza o fuzzy matching usando fuzzywuzzy
+    matches = fuzzy_search(search_term, titles, limit=10)  # Limitando a 10 resultados
+
+    # Retorna os resultados como JSON
+    results = [{'title': match[0], 'score': match[1]} for match in matches]
+    return jsonify(results)
 
 @app.route("/logout")
 @login_required
