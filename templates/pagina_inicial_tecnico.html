@@ -15,6 +15,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/fotns-icones.css') }}">
     <link rel="shortcut icon" href="https://www.asseponto.com.br/assepontoControle/suporte/Atendimento/default.aspx?filTipo=1" type="image/ico" />
 
+    <style>
+      /* Estilos simples para exibir os resultados */
+      #search-results {
+          list-style: none;
+          padding: 0;
+      }
+      #search-results li {
+          padding: 5px;
+          border: 1px solid #ccc;
+          margin: 2px 0;
+      }
+  </style>
+
  </head>
 
 <body>
@@ -131,15 +144,15 @@
             <h1 class="section_title"><i class="icon icon-code"></i> Busca do Suporte </h1>
 
             <div class="search">
-              <input type="search" id="search" placeholder="Digite sua Busca" autocomplete="off">
-              <ul id="search-results" ></ul>
-
-              <script>
+              <input type="search" id="search-input" placeholder="Digite sua busca..." autocomplete="off">
+              <ul id="search-results"></ul>
+            </div>
+      
+            <script>
                 // Função de busca via AJAX
                 document.getElementById('search-input').addEventListener('input', function(event) {
                     let searchTerm = event.target.value.trim();  // Pega o valor do campo de busca
-                    let userType = "{{ user_type }}";  // Tipo de usuário passado pelo Flask
-        
+                    
                     // Se o termo de busca estiver vazio, não faz a requisição
                     if (searchTerm === "") {
                         document.getElementById('search-results').innerHTML = '';  // Limpa os resultados
@@ -147,7 +160,7 @@
                     }
         
                     // Faz a requisição AJAX para a rota de busca
-                    fetch(`/search?q=${searchTerm}&user_type=${userType}`)
+                    fetch(`/search?q=${searchTerm}`)
                         .then(response => response.json())
                         .then(data => {
                             let results = document.getElementById('search-results');
@@ -156,17 +169,15 @@
                             // Exibe os novos resultados da busca
                             data.forEach(result => {
                                 let li = document.createElement('li');
-                                li.textContent = `${result.title} (Similaridade: ${result.score}%)`;
+                                li.textContent = `${result.title}`;
                                 results.appendChild(li);
                             });
                         })
                         .catch(error => {
                             console.error('Erro:', error);
-                            // Em caso de erro, podemos limpar os resultados ou mostrar uma mensagem
                         });
                 });
             </script>
-            </div>
             
             <div class="box-artigo">
                 

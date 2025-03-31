@@ -3,6 +3,8 @@
 dados = consultar()
 
 print(dados)'''
+
+from Crud import data_hora
 from dotenv import load_dotenv
 import os
 import mysql.connector

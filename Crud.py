@@ -1,4 +1,4 @@
-from conexao_db import conectar, conexao_db
+from conexao_db import conectar
 import mysql.connector
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -34,19 +34,29 @@ from fuzzywuzzy import process
 from conexao_db import conectar
 
 def get_titles_from_db(user_type):
-    conn = conectar()  # Conectar ao banco de dados
+    # Conectar ao banco de dados
+    conn = conectar()
     cursor = conn.cursor()
-
-    if user_type == 'cliente':
+    
+    if user_type == 'gestor':
+        cursor.execute("SELECT titulo FROM chamados")
+    elif user_type == 'tecnico':
+        cursor.execute("SELECT titulo FROM chamados WHERE permissoes = 'suporte' OR permissoes = 'todos'")
+    elif user_type == 'cliente':
         cursor.execute("SELECT titulo FROM chamados WHERE permissoes = 'todos'")
-
-    elif user_type == 'tecnico' or user_type == 'gestor':
-        cursor.execute("SELECT titulo FROM chamados WHERE permissoes IN ('todos', 'tecnico')")
-
-    titulos = [row[0] for row in cursor.fetchall()]
+    
+    # Recupera todos os títulos
+    titles = [row[0] for row in cursor.fetchall()]
+    
+    # Fecha a conexão
+    cursor.close()
     conn.close()
-    return titulos
+    
+    return titles
 
 def fuzzy_search(search_term, titles, limit=5):
+    # Verifique como o fuzzywuzzy está fazendo a busca
+    print(f"Buscando por: {search_term} entre os títulos: {titles}")
     matches = process.extract(search_term, titles, limit=limit)
+    print("Resultados do fuzzywuzzy:", matches)
     return matches

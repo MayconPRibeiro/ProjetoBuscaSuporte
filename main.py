@@ -5,6 +5,7 @@ from login import User, load_user
 from flask_login import LoginManager
 from conexao_db import conectar
 from Crud import data_hora, get_titles_from_db, fuzzy_search
+from fuzzywuzzy import process
 
 import mysql.connector
 import os
@@ -108,20 +109,26 @@ def pagina_inicial_gestor():
     else:
         return redirect(url_for("index"))
 
-@app.route('/search', methods=['GET'])
-def search():
-    search_term = request.args.get('q', '')  # Captura o termo de busca
-    user_type = current_user.tipo  # Obtém o tipo de usuário diretamente do current_user
-    
-    # Busca os títulos com base na permissão do usuário
-    titles = get_titles_from_db(user_type)
-    
-    # Realiza o fuzzy matching usando fuzzywuzzy
-    matches = fuzzy_search(search_term, titles, limit=10)  # Limitando a 10 resultados
 
-    # Retorna os resultados como JSON
+@app.route('/search', methods=['GET'])
+@login_required
+def search():
+    search_term = request.args.get('q', '')  # Termo de busca
+    limit = int(request.args.get('limit', 5))  # Limite de resultados
+
+    if search_term:
+        # Busca os títulos do banco de dados
+        titles = get_titles_from_db(current_user.tipo)
+
+        # Realiza a busca fuzzy
+        matches = process.extract(search_term, titles, limit=limit)
+    else:
+        matches = []
+
+    # Retorna os resultados no formato JSON
     results = [{'title': match[0], 'score': match[1]} for match in matches]
     return jsonify(results)
+
 
 @app.route("/logout")
 @login_required
@@ -152,7 +159,7 @@ def novo_conteudo():
         try:
             conn = conectar()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
+            cursor.execute('INSERT INTO chamados (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
             conn.commit()
             cursor.close()
             conn.close()
@@ -162,7 +169,7 @@ def novo_conteudo():
             msg = f"Erro ao salvar: {str(erro)}"
 
     data_hora_atual = data_hora()
-    data_hora_atual_exibir = data_hora_atual.strftime('%d-%m-%Y %H:%M')
+    data_hora_atual_exibir = data_hora_atual.strftime('%Y-%m-%d %H:%M')
 
     return render_template("novo_conteudo.html", msg=msg, data_hora_atual_exibir=data_hora_atual_exibir)
 
@@ -188,7 +195,7 @@ def novo_conteudo_gestor():
         try:
             conn = conectar()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO conteudo (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
+            cursor.execute('INSERT INTO chamados (titulo, descricao, nome_tecnico, permissoes, data_hora) VALUES (%s, %s, %s, %s, %s)', (titulo, descricao, nome_tecnico, permissoes, data_hora_atual))
             conn.commit()
             cursor.close()
             conn.close()
@@ -224,7 +231,7 @@ def editar_conteudo():
         try:
             conn = conectar()
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO conteudo (titulo, categoria, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s, %s)', (titulo, categoria, descricao, nome_tecnico, permissoes))
+            cursor.execute('INSERT INTO chamados (titulo, categoria, descricao, nome_tecnico, permissoes) VALUES (%s, %s, %s, %s, %s)', (titulo, categoria, descricao, nome_tecnico, permissoes))
             conn.commit()
             cursor.close()
             conn.close()
